@@ -84,7 +84,7 @@ def get_speech_timestamps(
     model = get_vad_model()
 
     padded_audio = np.pad(
-        audio.numpy(), (0, window_size_samples - audio.shape[0] % window_size_samples)
+        audio.cpu().numpy(), (0, window_size_samples - audio.shape[0] % window_size_samples)
     )
     speech_probs = model(padded_audio.reshape(1, -1)).squeeze(0)
 
